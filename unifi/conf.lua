@@ -4,7 +4,7 @@
 ]]--
 
 -- device mapping
-dofile "hwmap/tl-wr1043ndv2.lua"
+dev = dofile("hwmap/tl-wr1043ndv2.lua")
 
 -- global switches
 enable = {
