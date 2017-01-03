@@ -1,4 +1,4 @@
-# openUnifi
+# openUF
 This project aims to create a wrapper between the UniFi management protocol and OpenWRT configuration, allowing a UniFi controller to configure WLANs and basic router settings on an OpenWRT device.
 
 Please note that, at this time, this project _does nothing._
@@ -6,7 +6,7 @@ Please note that, at this time, this project _does nothing._
 ## Why?
 A few reasons, really:
 - UBNT gear is cost effective, but not the cheapest. Sometimes cost is the ultimate factor.
-- The USG is not a particularly good product. The USG Pro, even less so.
+- The USG is not a particularly impressive product for the price. The USG Pro, even less so.
 - Having a central management interface for basic configuration is helpful.
 - Being able to run custom software external to the management interface can be helpful in certain situations. Imagine running a custom daemon or piece of software in a container on an always-on device, that device also supplying WiFi to a location. This device costs as little as $50 and the network configuration can be remotely managed.
 
