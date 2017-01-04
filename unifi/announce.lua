@@ -31,7 +31,7 @@ PKT_TYPE_PLATFORM2 		= 0x15
 PKT_TYPE_FWVER_SHORT	= 0x16
 PKT_TYPE_FWVER_FACTORY	= 0x1b
 
-PKT_BLOB_17_18_19_1A 	= {
+PKT_BLOB_17_18_19_1A 	= {	-- todo: figure out what these fields mean
 	0x17, 0x00, 0x01, 0x01,
 	0x18, 0x00, 0x01, 0x00,
 	0x19, 0x00, 0x01, 0x01,
@@ -46,10 +46,11 @@ local counter = {
 }
 
 -- temporary
-local mac = {0x00, 0x11, 0x22, 0x33, 0xd3, 0xad}
-local ipaddr = {192, 168, 188, 88}
-local uptime = {val = 15, idx = 0}
-local hostname = "openUF"
+local mac 		= {0x24, 0xa4, 0x3c, 0x00, 0xd3, 0xad}
+local ipaddr 	= {192, 168, 188, 88}
+local uptime 	= {val = 15, idx = 0}
+local hostname 	= "openUF"
+local adopted 	= false
 
 -- open device file
 local ufhw = {}
@@ -99,7 +100,7 @@ w = ufpkt.init(PKT_TYPE_PLATFORM2)
 ufpkt.catstr(w, ufhw.uap.platform)
 ufpkt.finish(w, packet)
 
-ufpkt.finish(PKT_BLOB_17_18_19_1A, packet)
+ufpkt.cattbl(packet, PKT_BLOB_17_18_19_1A)
 
 w = ufpkt.init(PKT_TYPE_HW_ADDR2)
 ufpkt.cattbl(w, mac)
@@ -115,6 +116,7 @@ ufpkt.catstr(w, ufhw.uap.fw.factoryver)
 ufpkt.finish(w, packet)
 
 packet[4] = bit.band(#packet - 4, 0xff)
+
 
 -- set up udp transfer
 udpb = socket.udp()
@@ -145,7 +147,7 @@ while true do
 
 	-- send the packet
 	udpb:send(tosend)
-	udpm:send(tosend)
+	--udpm:send(tosend)
 
 	-- wait a while
 	socket.select(nil, nil, 10)
