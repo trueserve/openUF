@@ -54,7 +54,7 @@ local adopted 	= false
 
 -- open device file
 local ufhw = {}
-ufhw.uap = dofile("umodel/" .. dev.openuf.uap.umodel .. ".lua")
+ufhw.uap = dofile("ufmodel/" .. dev.openuf.uap.ufmodel .. ".lua")
 
 -- packet start
 packet = {0x02, 0x06, 0x00, 0x00} -- header and empty length field

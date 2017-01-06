@@ -39,7 +39,7 @@ dev.conf.vlan = {
 dev.openuf = {}
 
 dev.openuf.uap = {
-	umodel 		= "uapg1-lr",
+	ufmodel 	= "uapg1-lr",
 	hwassign 	= {"radio0"}
 }
 
