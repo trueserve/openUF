@@ -3,38 +3,57 @@
 
 ]]--
 
+local dev = {}
+dev.conf = {}
+
 -- openwrt hw config
-config_net = {
+dev.conf.net = {
 	lan_name 	= "lan",
-	lan_swcpu 	= "eth1",
+	lan_cpueth 	= "eth1",
+	lan_vlanid  = 1,
 	wan_name 	= "wan",
-	wan_swcpu 	= "eth0"
-	wan_swvlan 	= 4090
+	wan_cpueth 	= "eth0",
+	wan_vlanid 	= 4090
 }
 
-config_led = {
-	name 		= "openunifi",
-	desc 		= "UF Status LED"
-	sysfs 		= "t1043:green:qos" -- replace me with valid
+dev.conf.led = {
+	name 		= "uf_status",
+	desc 		= "UF Status LED",
+	sysfs 		= "tp-link:green:system"
 }
+
+dev.conf.vlan = {
+	cpu_lan 	= 0,
+	cpu_wan 	= 6,
+	ports 		= {
+		lan1 	= 1,
+		lan2 	= 2,
+		lan3 	= 3,
+		lan4 	= 4,
+		wan 	= 5
+	}
+}
+
 
 -- unifi configurations
-config_uap = {
-{
-	umodel 		= "uap-lr",
+dev.openuf = {}
+
+dev.openuf.uap = {
+	umodel 		= "uapg1-lr",
 	hwassign 	= {"radio0"}
-	bootver 	= "",
-	firmver 	= ""
-},
 }
 
-config_usg = {
+dev.openuf.usg = {
 	umodel 		= "usg3",
 	bootver 	= "",
 	firmver 	= "",
-	fwprefix 	= "UF Controller - "
+	rulepre 	= "uf_",
+	descpre 	= "UF Controller - "
 }
 
-config_usw = {
-	switch 		= "switch0"
+dev.openuf.usw = {
+	switch 		= "switch0",
+	mirror_type = "single"
 }
+
+return dev
